@@ -47,7 +47,8 @@ const anchorElement = (
   <a href="https://www.google.com/">click to visit</a>
 )
 
-
+ 
+const age = "My age is 21"
 // let us see how React.createElement works
 // React.createElement is a function in React that's used to create React elements, which are the building blocks of React applications.
 // It takes three arguments:
@@ -59,14 +60,20 @@ const anchorElement = (
 // Example 
 
 const theReactElement = React.createElement(
-  "a",
+  "a",                                                             // Now let us see how declaring the variable in globally makes it to executionin line no 50
   {href:"https://www.linkedin.com/in/sivasish48/"},
-  "Click to visit profile."
-)
+  "Click to visit profile.",
+  age
+) // and in return mention it as a evaluated expression
 
 ReactDOM.createRoot(document.getElementById('root'))
 .render(
    
-  theReactElement
+ 
+  <div>
+    {theReactElement}
+    <App/>
+  </div>
+  
    
 )
