@@ -1,4 +1,4 @@
-import {useState,useCallback, useEffect} from 'react'
+import {useState,useCallback, useEffect,useRef} from 'react'
 function App() {
   // Now as we know that there are several dependecies which are getting updated on each click .
   // So to track them we should use the useState() hhok
@@ -21,9 +21,19 @@ function App() {
   const [password,setPassword] = useState("")
 
 
+// useRef Hook
+// useRef is used to take anything's reference.
+//now to copy the password in the input box by clicking the "copy" button we need to use the useRef hook for the reference 
+const passwordRef = useRef(null)
+// now mention this reference as the "passwordRef" in the input tag.
+// Now after passing the reference in the input tag , then we need to create a onclick() method in the button and paas a method
+
+
   // now let us make a password generating method
  // for this we have to use a useCallback hook rather than using a general function.
  // What is useCallback hook?
+
+
 
 // The React useCallback Hook returns a memoized callback function.
 // Think of memorization as the caching value as it doesnot need get recalculated.
@@ -55,6 +65,28 @@ function App() {
         setPassword(thePass)
 
      },[length,useNum,useSpecialChar])
+     
+
+      const copyToClipBoard = useCallback(() =>{
+        
+
+        // To select the password from the keyboard we have to write below line
+        window.navigator.clipboard.writeText(password)
+
+        // To make the password text selected we have to use the below ref as we declared it earlier
+        passwordRef.current?.select();
+
+
+        // or to select any particular range we can do the below operation
+
+        //passwordRef.current?.setSelectionRange(0,5)
+
+      },[password])
+          
+      
+
+     //The useEffect Hook allows you to perform side effects in your components.
+     // It accepts basically two arguments , one is the the function and the other one is optional which is dependencies.
 
     useEffect(()=>{
       passwordGenerator()
@@ -69,8 +101,9 @@ function App() {
         className="outline-none w-full py-1 px-3"
         placeholder="Password"
         readOnly
+        ref={passwordRef}
         />
-      <button className='outline-none bg-blue-700 text-white px-3 py-0.5 shrink-0'>copy</button>
+      <button onClick ={copyToClipBoard}className='outline-none bg-blue-700 text-white px-3 py-0.5 shrink-0'>copy</button>
 
       </div>
     <div className='flex text-sm gap-x-2'>
