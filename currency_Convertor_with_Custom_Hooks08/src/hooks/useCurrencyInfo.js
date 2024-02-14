@@ -20,7 +20,7 @@ function useCurrencyInfo(currency){
     useEffect(()=>{
         fetch(`https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/${currency}.json`)  // Api is called using fetch in a use Effect hoo and we can use chaining as well.
         .then((response)=>{
-            JSON.parse(response)
+            return response.json()
         })
         .then((json_response)=>{
             // now to update the json data we need to use the useState hook.
