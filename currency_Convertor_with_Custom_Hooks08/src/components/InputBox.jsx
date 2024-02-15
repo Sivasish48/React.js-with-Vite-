@@ -6,7 +6,7 @@ function InputBox({
     amount,   // amount that needs to be converted into an differnct currency's amount.
     onAmountChange,  // function when amounts get changed
     onCurrencyChange,  // function for currency changing
-    currencyOptions = [""],  // currency option to be put in the selectCurrency
+    currencyOptions = [],  // currency option to be put in the selectCurrency
     selectCurrency="",  // type of currency
     amountDisable = false,   // the feature for disabling the input to take ammount is "false"
     currencyDisable = false,    //  the feature for disabling the input to take type of currency is "false"
