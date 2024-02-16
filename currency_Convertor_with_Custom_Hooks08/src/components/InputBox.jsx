@@ -7,7 +7,7 @@ function InputBox({
     onAmountChange,  // function when amounts get changed
     onCurrencyChange,  // function for currency changing
     currencyOptions = [],  // currency option to be put in the selectCurrency
-    selectCurrency="",  // type of currency
+    selectCurrency= "usd",  // type of currency
     amountDisable = false,   // the feature for disabling the input to take ammount is "false"
     currencyDisable = false,    //  the feature for disabling the input to take type of currency is "false"
      
@@ -20,7 +20,7 @@ function InputBox({
 
    const inputId = useId()
     return (
-        <div className={`bg-white p-3 rounded-lg text-sm flex `}>
+        <div className={`bg-white p-3 rounded-lg text-sm flex ${className}`}>
             <div className="w-1/2">
                 <label htmlFor={inputId} className="text-black/40 mb-2 inline-block">
                     {label}  {/* label like from or to*/} 
@@ -45,7 +45,9 @@ function InputBox({
                 <select
                     className="rounded-lg px-1 py-1 bg-gray-100 cursor-pointer outline-none"
                     value={selectCurrency}
-                    onChange={(e) => onCurrencyChange && onCurrencyChange(e.target.value)}
+                    onChange= {(e)=>{
+                        onCurrencyChange && onCurrencyChange(e.target.value)
+                    }}
                     disabled={currencyDisable}
                 >
                     

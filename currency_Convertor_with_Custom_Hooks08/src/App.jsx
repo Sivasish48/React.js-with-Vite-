@@ -7,10 +7,10 @@ function App() {
   
    // here make an useState hook
 
-   const [amount,setAmount] = useState(0)  // This hook is used to set the amount 
-   const [from,setFrom] = useState("")   // This hook sets which currency type is going to be converted
-   const [to,setTo] = useState("")        // This hook sets in which currency  the given currency type will be changed.
-   const [convertedAmount,setConvertedAmount] = useState(0)  // This hook is for the converted amount
+   const [amount,setAmount] = useState()  // This hook is used to set the amount 
+   const [from,setFrom] = useState("usd")   // This hook sets which currency type is going to be converted
+   const [to,setTo] = useState("inr")        // This hook sets in which currency  the given currency type will be changed.
+   const [convertedAmount,setConvertedAmount] = useState()  // This hook is for the converted amount
 
    const currencyInfo = useCurrencyInfo(from) 
 
@@ -21,22 +21,18 @@ function App() {
    const swap = ()=>{
     setFrom(to)
     setTo(from)
-    convertedAmount(amount)
-    setAmount(convertedAmount) 
+   // setConvertedAmount(amount)
+   // setAmount(convertedAmount) 
+   convertion()
    }
    
    // now we have to set the state where it chabges to the result or converted amount while the user clicks the convert button.
 
    const convertion = ()=>{
-     setAmount(amount * currencyInfo[to])
+     setConvertedAmount(amount * currencyInfo[to])
    }
 
-   
-
-   
-   
-
-   return (
+    return (
     <div
     className="w-full h-screen flex flex-wrap justify-center items-center bg-cover bg-no-repeat"
     style={{
@@ -58,7 +54,7 @@ function App() {
                             amount={amount}
                             currencyOptions={optns}
                             onCurrencyChange={(currency)=>{
-                              setAmount(amount)
+                              setFrom(currency)
                             }}
                             selectCurrency={from}
                             onAmountChange={(amount)=>{
@@ -85,13 +81,31 @@ function App() {
                               setTo(currency)
                               
                             }}
-                            selectCurrency={from}
+                            selectCurrency={to}
                             amountDisable 
                             
                         />
                     </div>
+                    
+
+
                     <button type="submit" className="w-full bg-blue-600 text-white px-4 py-3 rounded-lg">
                         Convert  {from.toUpperCase()} to {to.toUpperCase()}
+                    </button>
+
+                    <button 
+                    type="reset"
+                    className="mt-2 w-full bg-blue-600 text-white px-4 py-3 rounded-lg text-xl font-bold"
+                     
+                     onClick = {(e) => {
+                        e.preventDefault();
+                        setConvertedAmount("")
+                        setAmount("")
+                        setFrom("usd")
+                        setTo("inr")
+                     }} 
+                     >
+                     Reset
                     </button>
                 </form>
             </div>

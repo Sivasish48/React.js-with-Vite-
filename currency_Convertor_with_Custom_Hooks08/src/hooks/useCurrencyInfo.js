@@ -3,9 +3,9 @@
 
 // example of a custom hooks
 
-function hello (){
+   function hello(){
     return[]
-}
+   }
 
 // We can also integrate the predefined hooks with custom hooks
 
@@ -13,22 +13,56 @@ import {useEffect,useState} from "react"
 
 // lets use a function
 
+
 function useCurrencyInfo(currency){
-    // I want to call an api and now here I want to immplement this hook when someone will call it.
-   
+    const [data, setData] = useState({})
+    useEffect(() => {
+        fetch(`https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/${currency}.json`)
+        .then((res) => res.json())
+        .then((res) => setData(res[currency]))
+        console.log(data);
+    }, [currency])
+    console.log(data);
+    return data
+}
+export default useCurrencyInfo;
+        
+
+
+
+//export default useCurrencyInfo;
+
+/*
+function useCurrencyInfo(){
+
+
     const [data,setData] = useState({})
-    useEffect(()=>{
-        fetch(`https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/${currency}.json`)  // Api is called using fetch in a use Effect hoo and we can use chaining as well.
-        .then((response)=>{
-            return response.json()
+
+    
+
+    useEffect(async function theFetch(){
+
+        try{
+        const fetchData = await fetch(`https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/${currency}.json`)
+
+        const fetchRes = await fetchData.json()
+        console.log(fetchRes);
+
+        } catch(error){
+            console.log("errorrrr");
+        }then((response)=>{
+            const data = response.json()
+            console.log(data);
+            return data
         })
         .then((json_response)=>{
             // now to update the json data we need to use the useState hook.
             return setData(json_response[currency])
         })
-    },[currency])
+    },[currency]) 
+  //  theFetch()
 
-    return data;
 }
 
-export default useCurrencyInfo;
+*/
+
