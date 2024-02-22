@@ -5,7 +5,7 @@ import './index.css'
 import { Route, RouterProvider,createBrowserRouter, createRoutesFromElements } from 'react-router-dom'
 import Layout from './Layout.jsx'
 
-import {Home,About,Contact} from './Components/index.js'
+import {Home,About,Contact,Github} from './Components/index.js'
 
 import User from './Components/User/User.jsx'
 // Create a router by a method
@@ -44,8 +44,15 @@ const router = createBrowserRouter(
       <Route path='' element={<Home/>}/>
       <Route path='About' element={<About/>}/>
       <Route path='Contact' element={<Contact/>}/>
+
       {/*Now the below router is for the user routing*/}
-       <Route path='user/:userId' element={<User/>}/>
+
+       <Route path='user/:userId' element={<User/>}/> 
+
+       {/*Now the below router is for the github*/}
+
+       <Route path='Github' element = {<Github/>}/>
+
     </Route>
   )
 )
