@@ -2,13 +2,17 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 
 import './index.css'
-import { RouterProvider,createBrowserRouter } from 'react-router-dom'
+import { Route, RouterProvider,createBrowserRouter, createRoutesFromElements } from 'react-router-dom'
 import Layout from './Layout.jsx'
 
-import Home from './Components/Home/Home'
-import About from './Components/About/About'
+import {Home,About,Contact} from './Components/index.js'
 
+import User from './Components/User/User.jsx'
 // Create a router by a method
+
+/*
+
+But there is a n another way to write it more simply.
 const router = createBrowserRouter([
   {
     path:'/',
@@ -21,10 +25,30 @@ const router = createBrowserRouter([
       {
         path:'About',
         element:<About/>
+      },
+      {
+        path:"Contact",
+        element:<Contact/>
       }
     ]
   }
 ])
+
+*/
+
+// Another way is 
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path='/' element={<Layout/>}>
+      <Route path='' element={<Home/>}/>
+      <Route path='About' element={<About/>}/>
+      <Route path='Contact' element={<Contact/>}/>
+      {/*Now the below router is for the user routing*/}
+       <Route path='user/:userId' element={<User/>}/>
+    </Route>
+  )
+)
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
