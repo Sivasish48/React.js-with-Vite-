@@ -10,8 +10,8 @@ function User(){
     )
 }
 
-<<<<<<< HEAD
-export default User 
-=======
+
+ 
+
 export default User
->>>>>>> 4f3ba91642cbdfa6302d92831ff2ad853b53300b
+

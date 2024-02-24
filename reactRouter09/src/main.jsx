@@ -5,7 +5,7 @@ import './index.css'
 import { Route, RouterProvider,createBrowserRouter, createRoutesFromElements } from 'react-router-dom'
 import Layout from './Layout.jsx'
 
-import {Home,About,Contact,Github} from './Components/index.js'
+import {Home,About,Contact,Github,githubInfo} from './Components/index.js'
 
 import User from './Components/User/User.jsx'
 // Create a router by a method
@@ -51,7 +51,7 @@ const router = createBrowserRouter(
 
        {/*Now the below router is for the github*/}
 
-       <Route path='Github' element = {<Github/>}/>
+       <Route path='Github' element = {<Github/>}  loader={githubInfo}/>
 
     </Route>
   )
