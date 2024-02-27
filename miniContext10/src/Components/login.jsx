@@ -1,14 +1,14 @@
-import React, { useContext } from'react'
+import React, {useState, useContext } from'react'
 import UserContext from '../Context/UserContext'
 function Login(){
   
-    const [username,setUsername] = React.useState("")
-    const [password,setpassword] = React.useState("")
+    const [username,setUsername] = useState('')
+    const [password,setPassword] = useState('')
 
 
     // Instead of using render props, we can pass the entire context object to React.useContext() to consume context at the top of our component.
 
-    const[setUser]= useContext(UserContext)
+    const{setUser}= useContext(UserContext)
 
     const handleSubmit=(e)=>{
           e.preventDefault()
@@ -27,7 +27,7 @@ function Login(){
             <input type="text" placeholder='password' 
             value={password}
             onChange={(e)=>{
-                return setpassword(e.target.value)
+                return setPassword(e.target.value)
             }}
             />
             <button onClick={handleSubmit}>Submit</button>
