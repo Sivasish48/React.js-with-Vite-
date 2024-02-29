@@ -1,3 +1,4 @@
+
 import { TodoProvider } from "./contexts" 
 
 function App(){
@@ -19,8 +20,87 @@ function App(){
         return [{id:Date.now(),...Todotask},...prev]
        })
 
-       
+
+
+       // So here we gonna be giving functionalities of updateTodo
+       // So first of all here we have id which is the id of the modified todos
+       // And the TodoTask is the new todos's msg
+       // so here we declare a call back with the prevTodo which is the parameter of is=f there any previous todos
+       // Then we used an iteration foreach which operates on every element or every todo existed on the todos array 
+       // Then we gave prevTodo as the parameter if there is previous todo exist
+       // then we check if the previously existed todo has the same id with the todo we are trying to update
+       //// If yes then update the Todotask or keep the prevTodo
+
+       const updateTodo =(id,Todotask)=>{
+            SetTodos((prev)=>{
+             prev.forEach((prevTodo)=>{
+                if(prevTodo.id === id){
+                   return Todotask
+                }else{
+                  return prevTodo
+                }
+             })
+          })
+       }
+    
+
+
+    // now let us jump into the functionalities of deleteTodo
+    // so here we used the prev as the previously exist todos
+    // Now we apply the filter method here which adds or check a pariticular functionaly or operation and makes a new array
+    // here we applied filter method and passed a parameter as prevTodo 
+    // and gives a new array where the input id is not equal to the any previous todos
+    // So it returns these todos which has the non equality todos
+
+
+    const deleteTodo=(id)=>{
+      return  SetTodos((prev)=>{
+          prev.filter((prevTodo)=>{
+             return prevTodo.id !== id
+          })
+       })
     }
+    }
+ 
+
+    // Now let us add functionality for the toggleTodo
+    // So here we did the exact same thing as updates odo
+    // but here we changed the completed property to its vice-versa
+    const ToggleTodo =(id)=>{
+      SetTodos((prev)=>
+        prev.forEach((prevTodo)=>
+           prevTodo.id === id?{...prevTodo,completed:!prevTodo.completed}:prevTodo)
+        )
+      
+    }
+
+
+    // Now let us write the code for the local storage of the browser
+
+    // let us call an useEffect
+    //localStorage.getItem("todos"): This retrieves the value associated with the key "todos" from the browser's localStorage. 
+    //The data stored in localStorage persists even after the browser is closed.
+    //JSON.parse(): This function parses the JSON-formatted string retrieved from localStorage and converts it into a JavaScript object.
+    React.useEffect(()=>{
+      const todos = JSON.parse(localStorage.getItem("todos"))
+
+      // let us check if there is any todos in localStorage
+      if(todos && todos.length>0){
+        SetTodos(todos)
+      }
+    },[])
+
+    // here i also want the todo list which are going into the todos through context Apis , We want them to save in the localStorage as well
+    // This useEffect hook is called whenever the todos array changes.
+    // The second argument [todos] is the dependency array, meaning the effect will run whenever the value of todos changes.
+    // Inside the useEffect, the setItem method of localStorage is called to store the todos array. 
+    // localStorage.setItem takes two arguments: the key under which to store the data (in this case, "todos"), and the value to store. 
+    // Since localStorage can only store strings, JSON.stringify is used to convert the todos array into a JSON string before storing it.
+    React.useEffect(()=>{
+      localStorage.setItem("todos",JSON.stringify("todos"))
+    },[todos])
+   
+   
     return(
     // Now add the todo provider
     // And provide the value
