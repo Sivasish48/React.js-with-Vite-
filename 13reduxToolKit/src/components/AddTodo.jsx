@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {useDispatch} from 'react-redux'
 import {addTodo} from '../features/todo/todoSlice' 
 
-function AddTodo(){
+ function AddTodo(){
 
     // now let us set up the states
     const [input,setInput] = useState()
@@ -44,3 +44,5 @@ function AddTodo(){
       </form>
     )
 }
+
+export default AddTodo

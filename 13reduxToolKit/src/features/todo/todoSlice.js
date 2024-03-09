@@ -3,12 +3,12 @@ import { createSlice,nanoid } from "@reduxjs/toolkit";
 
 // now create a initial state for a todo  
 
-const initialState = [{
+const initialState = {
     todos:{
         id:1,
         text:"Gym"
     }
-}]
+}
 
 // now use the createSlice functionality 
 
